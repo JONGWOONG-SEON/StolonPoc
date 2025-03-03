@@ -1,27 +1,27 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: stolon-proxy-service
-spec:
-  ports:
-    - port: 5432
-      targetPort: 5432
-  selector:
-    component: stolon-proxy
-    stolon-cluster: kube-stolon
-
-
-# 고정적으로 외부 호출을 원하면 주석해제
 #apiVersion: v1
 #kind: Service
 #metadata:
 #  name: stolon-proxy-service
 #spec:
-#  type: NodePort
 #  ports:
 #    - port: 5432
 #      targetPort: 5432
-#      nodePort: 32000
 #  selector:
 #    component: stolon-proxy
 #    stolon-cluster: kube-stolon
+
+
+# 고정적으로 외부 호출을 원하면 주석해제
+apiVersion: v1
+kind: Service
+metadata:
+  name: stolon-proxy-service
+spec:
+  type: NodePort
+  ports:
+    - port: 5432
+      targetPort: 5432
+      nodePort: 32000
+  selector:
+    component: stolon-proxy
+    stolon-cluster: kube-stolon

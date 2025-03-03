@@ -22,8 +22,17 @@ spec:
           image: sorintlab/stolon:master-pg10
           command:
             - "/bin/bash"
-            - "-ec"
+            - "-c"
             - |
+              rm -rf /var/lib/apt/lists/*
+              rm /etc/apt/sources.list
+              #sed -i '/apt.postgresql.org\/pub\/repos\/apt/d' /etc/apt/sources.list
+              #mv /etc/apt/sources.list /etc/apt/sources.list.bak
+              echo "deb http://archive.debian.org/debian stretch main contrib non-free" | tee /etc/apt/sources.list
+              echo "deb http://archive.debian.org/debian-security stretch/updates main contrib non-free" | tee -a /etc/apt/sources.list
+              apt update -y
+              apt install -y tcpdump iproute2 net-tools
+              
               exec gosu stolon stolon-sentinel
           env:
             - name: POD_NAME
