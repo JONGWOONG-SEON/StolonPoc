@@ -43,3 +43,6 @@ kubectl run -i -t stolonctl --image=sorintlab/stolon:master-pg10 --restart=Never
 
 ### Postgresql CLI 접근
 - `psql --host stolon-proxy-service  --port 5432 postgres -U stolon -W`
+
+### Kube 자료
+- `kubectl cp stolon-keeper-0:{/Source} {/Target}`
